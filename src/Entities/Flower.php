@@ -25,6 +25,13 @@ final class Flower
         return new self(new FlowerSpecie($chars[0]), new FlowerSize($chars[1]), 1);
     }
 
+    public function increaseQuantity(): self {
+        $newFlower = clone $this;
+        ++$newFlower->quantity;
+
+        return $newFlower;
+    }
+
     public function specie(): string
     {
         return (string)$this->specie;

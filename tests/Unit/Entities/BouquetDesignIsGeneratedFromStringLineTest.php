@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace Solaing\FlowerBouquets\Tests\Entities;
+namespace Solaing\FlowerBouquets\Tests\Unit\Entities;
 
 use PHPUnit\Framework\TestCase;
 use Solaing\FlowerBouquets\Entities\BouquetDesign;
 use Solaing\FlowerBouquets\Entities\Flower;
 
-final class BouquetDesignIsGeneratedFromStringLine extends TestCase
+final class BouquetDesignIsGeneratedFromStringLineTest extends TestCase
 {
     public final function test_bouquet_design_contains_the_correct_name()
     {

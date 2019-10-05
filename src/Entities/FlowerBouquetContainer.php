@@ -14,7 +14,14 @@ final class FlowerBouquetContainer
 
     public function addFlower(Flower $flower): void
     {
-        $this->flowers[] = $flower;
+        $flowerInContainer = $this->getSameFlowerSpecieFromTheContainer($flower);
+        if ($flowerInContainer === null) {
+            $this->flowers[] = $flower;
+        } else {
+            $newFlowerInContainer = $flowerInContainer->increaseQuantity();
+
+            $this->replaceFlowerFromSameSpecie($newFlowerInContainer);
+        }
     }
 
     public function addBouquetDesign(BouquetDesign $bouquetDesign): void
@@ -22,15 +29,25 @@ final class FlowerBouquetContainer
         $this->bouquetDesigns[] = $bouquetDesign;
     }
 
-    public function isFlowerSpecieAlreadyInTheContainer(Flower $flower): bool
+    private function getSameFlowerSpecieFromTheContainer(Flower $flower): ?Flower
     {
         foreach ($this->flowers as $flowerInContainer) {
             if ($flowerInContainer->specie() === $flower->specie()) {
-                return true;
+                return $flowerInContainer;
             }
         }
 
-        return false;
+        return null;
+    }
+
+    private function replaceFlowerFromSameSpecie(Flower $flower): void
+    {
+        foreach ($this->flowers as $key => $flowerInContainer) {
+            if ($flowerInContainer->specie() === $flower->specie()) {
+                $this->flowers[$key] = $flower;
+                return;
+            }
+        }
     }
 
     public function flowers(): array

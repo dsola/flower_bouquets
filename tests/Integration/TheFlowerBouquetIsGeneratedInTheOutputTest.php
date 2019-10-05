@@ -2,14 +2,14 @@
 declare(strict_types=1);
 
 
-namespace Solaing\FlowerBouquets\Tests;
+namespace Solaing\FlowerBouquets\Tests\Integration;
 
 
 use PHPUnit\Framework\TestCase;
 use Solaing\FlowerBouquets\GenerateBouquets;
 use Solaing\FlowerBouquets\Tests\Stubs\OutputStub;
 
-final class TheFlowerBouquetIsGeneratedInTheOutput extends TestCase
+final class TheFlowerBouquetIsGeneratedInTheOutputTest extends TestCase
 {
     private $output;
 
@@ -20,7 +20,7 @@ final class TheFlowerBouquetIsGeneratedInTheOutput extends TestCase
     }
 
     public final function test_the_flower_bouquets_title_is_generated() {
-        (new GenerateBouquets($this->output))->exec(__DIR__. '/resources/empty_file.txt');
+        (new GenerateBouquets($this->output))->exec(__DIR__ . '/../resources/empty_file.txt');
 
         $writtenLines = $this->output->writtenLines();
         $this->assertContains("----- Flower Bouquets ---", $writtenLines);
