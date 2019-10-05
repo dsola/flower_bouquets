@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Solaing\FlowerBouquets\Input;
 
 
-use Solaing\FlowerBouquets\Entities\Container;
+use Solaing\FlowerBouquets\Entities\FlowerBouquetContainer;
 
-final class FileReader
+final class GenerateFlowerBouquetContainer
 {
-    public function read(string $filePath): Container
+    public function fromFilePath(string $filePath): FlowerBouquetContainer
     {
         $fn = fopen($filePath, "r");
 
@@ -22,6 +22,6 @@ final class FileReader
 
         fclose($fn);
 
-        return new Container();
+        return new FlowerBouquetContainer();
     }
 }
