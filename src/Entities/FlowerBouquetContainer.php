@@ -14,7 +14,7 @@ final class FlowerBouquetContainer
 
     public function addFlower(Flower $flower): void
     {
-        $flowerInContainer = $this->getSameFlowerSpecieFromTheContainer($flower);
+        $flowerInContainer = $this->getSameFlowerFromTheContainer($flower);
         if ($flowerInContainer === null) {
             $this->flowers[] = $flower;
         } else {
@@ -29,10 +29,39 @@ final class FlowerBouquetContainer
         $this->bouquetDesigns[] = $bouquetDesign;
     }
 
-    private function getSameFlowerSpecieFromTheContainer(Flower $flower): ?Flower
+    public function containsFlower(Flower $flower): bool
+    {
+        $flower = $this->getSameFlowerFromTheContainer($flower);
+
+        return $flower !== null && $flower->quantity() > 0;
+    }
+
+    public function extractFlower(Flower $flower): ?Flower
+    {
+        //TODO: Add tests
+        foreach ($this->flowers as $key => $flowerInContainer) {
+            if ($flowerInContainer->isSameAs($flower)) {
+                $flowerWithQuantityExtracted = $flowerInContainer->extractQuantity($flower->quantity());
+                $this->flowers[$key] = $flowerWithQuantityExtracted;
+
+                return $flowerWithQuantityExtracted;
+            }
+        }
+
+        return null;
+    }
+
+
+    public function getFlowersWithExactQuantity(int $quantity): array
+    {
+        //TODO: Return flowers that sums the exact quantity
+        return [];
+    }
+
+    private function getSameFlowerFromTheContainer(Flower $flower): ?Flower
     {
         foreach ($this->flowers as $flowerInContainer) {
-            if ($flowerInContainer->specie() === $flower->specie()) {
+            if ($flowerInContainer->isSameAs($flower)) {
                 return $flowerInContainer;
             }
         }
@@ -43,7 +72,7 @@ final class FlowerBouquetContainer
     private function replaceFlowerFromSameSpecie(Flower $flower): void
     {
         foreach ($this->flowers as $key => $flowerInContainer) {
-            if ($flowerInContainer->specie() === $flower->specie()) {
+            if ($flowerInContainer->isSameAs($flower)) {
                 $this->flowers[$key] = $flower;
                 return;
             }

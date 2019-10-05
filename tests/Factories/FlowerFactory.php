@@ -10,14 +10,14 @@ use Solaing\FlowerBouquets\Entities\FlowerSpecie;
 
 final class FlowerFactory
 {
-    public static function make(string $specie = null): Flower
+    public static function make(string $specie = null, string $size = null, int $quantity = null): Flower
     {
         $faker = Factory::create();
 
         return new Flower(
             new FlowerSpecie($specie ?? strtolower($faker->randomLetter)),
-            new FlowerSize($faker->randomElement(["S", "L"])),
-            random_int(1, 200)
+            new FlowerSize($size ?? $faker->randomElement(["S", "L"])),
+            $quantity ?? random_int(1, 200)
         );
     }
 }

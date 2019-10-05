@@ -29,9 +29,9 @@ final class TheBouquetContainerStoresTheFlowersAndBouquetsTest extends TestCase
         $this->assertEquals($bouquetDesign, $container->bouquetDesigns()[0]);
     }
 
-    final public function test_the_container_increases_the_quantity_of_flowers_if_the_specie_is_there() {
+    final public function test_the_container_increases_the_quantity_of_flowers_if_is_there() {
         $flower1 = FlowerFactory::make();
-        $flower2 = FlowerFactory::make($flower1->specie());
+        $flower2 = FlowerFactory::make($flower1->specie(), $flower1->size());
         $container = new FlowerBouquetContainer();
 
         $container->addFlower($flower1);
@@ -53,5 +53,43 @@ final class TheBouquetContainerStoresTheFlowersAndBouquetsTest extends TestCase
         /** @var Flower $flower */
         $flower = $container->flowers()[0];
         $this->assertEquals($flower1->quantity(), $flower->quantity());
+    }
+
+    final public function test_the_container_NOT_increase_the_quantity_if_the_size_does_not_match() {
+        $flower1 = FlowerFactory::make("a", "S");
+        $flower2 = FlowerFactory::make("a", "L");
+        $container = new FlowerBouquetContainer();
+
+        $container->addFlower($flower1);
+        $container->addFlower($flower2);
+
+        /** @var Flower $flower */
+        $flower = $container->flowers()[0];
+        $this->assertEquals($flower1->quantity(), $flower->quantity());
+    }
+
+    final public function test_container_knows_if_a_flower_exists() {
+        $flower1 = FlowerFactory::make();
+        $container = new FlowerBouquetContainer();
+
+        $container->addFlower($flower1);
+
+        $this->assertTrue($container->containsFlower($flower1));
+    }
+
+    final public function test_container_knows_if_a_flower_NOT_exists() {
+        $flower1 = FlowerFactory::make();
+        $container = new FlowerBouquetContainer();
+
+        $this->assertFalse($container->containsFlower($flower1));
+    }
+
+    final public function test_container_knows_when_there_are_no_more_flowers_left() {
+        $flower1 = FlowerFactory::make("a", "S", 0);
+        $container = new FlowerBouquetContainer();
+
+        $container->addFlower($flower1);
+
+        $this->assertFalse($container->containsFlower($flower1));
     }
 }

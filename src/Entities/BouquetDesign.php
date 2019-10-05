@@ -55,6 +55,29 @@ final class BouquetDesign
         return $flowers;
     }
 
+    public function name(): string
+    {
+        return (string)$this->name;
+    }
+
+    public function flowerSize(): string
+    {
+        return (string)$this->flowerSize;
+    }
+
+    /**
+     * @return Flower[]
+     */
+    public function flowers(): array
+    {
+        return $this->flowers;
+    }
+
+    public function totalFlowers(): int
+    {
+        return $this->totalFlowers;
+    }
+
     private static function extractFirstNumberOccurrence(array $chars): int
     {
         $total = "";
@@ -80,26 +103,4 @@ final class BouquetDesign
 
         return (int)$total;
     }
-
-    public function name(): string
-    {
-        return (string)$this->name;
-    }
-
-    public function flowerSize(): string
-    {
-        return (string)$this->flowerSize;
-    }
-
-    public function flowers(): array
-    {
-        return $this->flowers;
-    }
-
-    public function totalFlowers(): int
-    {
-        return $this->totalFlowers;
-    }
-
-
 }

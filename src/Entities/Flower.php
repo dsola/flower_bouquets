@@ -32,6 +32,18 @@ final class Flower
         return $newFlower;
     }
 
+    public function extractQuantity(int $quantity): self {
+        $newFlower = clone $this;
+
+        if ($newFlower->quantity() < $quantity) {
+            $newFlower->quantity = 0;
+        } else {
+            $newFlower->quantity = $newFlower->quantity - $quantity;
+        }
+
+        return $newFlower;
+    }
+
     public function specie(): string
     {
         return (string)$this->specie;
@@ -45,5 +57,10 @@ final class Flower
     public function quantity(): int
     {
         return $this->quantity;
+    }
+
+    public function isSameAs(Flower $flower): bool
+    {
+        return $this->specie() === $flower->specie() && $this->size() === $flower->size();
     }
 }
