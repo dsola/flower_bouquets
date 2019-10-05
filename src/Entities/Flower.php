@@ -11,7 +11,7 @@ final class Flower
     private $size;
     private $quantity;
 
-    private function __construct(string $specie, FlowerSize $size, int $quantity)
+    public function __construct(FlowerSpecie $specie, FlowerSize $size, int $quantity)
     {
         $this->specie = $specie;
         $this->size = $size;
@@ -22,12 +22,12 @@ final class Flower
     {
         $chars = str_split($stringLine);
 
-        return new self($chars[0], new FlowerSize($chars[1]), 1);
+        return new self(new FlowerSpecie($chars[0]), new FlowerSize($chars[1]), 1);
     }
 
     public function specie(): string
     {
-        return $this->specie;
+        return (string)$this->specie;
     }
 
     public function size(): string
