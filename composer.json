@@ -1,0 +1,17 @@
+{
+    "name": "solaing/flower_bouquets",
+    "description": "This application reads information about the flower shop providers and generates the flower bouquets ready to be sent",
+    "require": {
+        "symfony/console": "4.3.*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.4"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "David Sola",
+            "email": "d.sola.03@gmail.com"
+        }
+    ]
+}
