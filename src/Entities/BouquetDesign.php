@@ -12,7 +12,7 @@ final class BouquetDesign
     private $flowers;
     private $totalFlowers;
 
-    private function __construct(BouquetName $name, FlowerSize $flowerSize, array $flowers, int $totalFlowers)
+    public function __construct(BouquetName $name, FlowerSize $flowerSize, array $flowers, int $totalFlowers)
     {
         $this->name = $name;
         $this->flowerSize = $flowerSize;
