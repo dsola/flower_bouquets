@@ -1,11 +1,21 @@
 {
     "name": "solaing/flower_bouquets",
     "description": "This application reads information about the flower shop providers and generates the flower bouquets ready to be sent",
+    "autoload": {
+        "psr-4": {
+            "Solaing\\FlowerBouquets\\": "src/"
+        }
+    },
     "require": {
         "symfony/console": "4.3.*"
     },
     "require-dev": {
         "phpunit/phpunit": "^8.4"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Solaing\\FlowerBouquets\\Tests\\": "tests/"
+        }
     },
     "license": "MIT",
     "authors": [
