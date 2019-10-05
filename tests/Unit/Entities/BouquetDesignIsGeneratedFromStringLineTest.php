@@ -61,4 +61,17 @@ final class BouquetDesignIsGeneratedFromStringLineTest extends TestCase
         $this->assertEquals(6, $flower->quantity());
     }
 
+    public final function test_bouquet_design_contains_flowers_with_more_than_one_digit_in_the_quantity()
+    {
+        $bouquetDesign = BouquetDesign::fromLine("AS30a44b6k20");
+
+        $flowers = $bouquetDesign->flowers();
+        /** @var Flower $flower */
+        $flower = $flowers[0];
+        $this->assertEquals(30, $flower->quantity());
+        $flower = $flowers[1];
+        $this->assertEquals(44, $flower->quantity());
+
+    }
+
 }

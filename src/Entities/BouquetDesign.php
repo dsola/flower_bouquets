@@ -25,7 +25,7 @@ final class BouquetDesign
         $chars = str_split($stringLine);
         $name = new BouquetName($chars[0]);
         $flowerSize = new FlowerSize($chars[1]);
-        $total = self::extractFirstNumberOccurrence(array_reverse($chars));
+        $total = self::extractLastNumberOccurrence($chars);
         $numOfDigitsInTotal = strlen((string)$total);
         $flowerCharsSize = sizeof($chars) - 2 - $numOfDigitsInTotal;
         $flowers = self::extractFlowers(
@@ -42,6 +42,7 @@ final class BouquetDesign
 
         while (sizeof($chars) > 0) {
             $flowerQuantity = self::extractFirstNumberOccurrence($chars);
+
             $chars = array_slice($chars, strlen((string)$flowerQuantity));
             $flowerSpecie = array_shift($chars);
             $flowers[] = new Flower(
@@ -61,7 +62,20 @@ final class BouquetDesign
             if (!is_numeric($char)) {
                 break;
             }
-            $total = $char . $total;
+            $total =  $total . $char;
+        }
+
+        return (int)$total;
+    }
+
+    private static function extractLastNumberOccurrence(array $chars): int
+    {
+        $total = "";
+        foreach (array_reverse($chars) as $char) {
+            if (!is_numeric($char)) {
+                break;
+            }
+            $total =  $char . $total;
         }
 
         return (int)$total;

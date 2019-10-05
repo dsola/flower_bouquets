@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Solaing\FlowerBouquets\Input;
 
 
+use Solaing\FlowerBouquets\Entities\BouquetDesign;
 use Solaing\FlowerBouquets\Entities\Flower;
 use Solaing\FlowerBouquets\Entities\FlowerBouquetContainer;
 
@@ -16,28 +17,36 @@ final class GenerateFlowerBouquetContainer
         $container = new FlowerBouquetContainer();
 
         while (!feof($fn)) {
-            $stringLine = fgets($fn);
+            $stringLine = trim((string)fgetss($fn));
             if ($this->isEmptyLine($stringLine)) {
                 continue;
             }
-            if ($this->isFormatttedForFlower($stringLine)) {
+            if ($this->isFormattedForFlower($stringLine)) {
                 $container->addFlower(Flower::fromLine($stringLine));
                 continue;
+            }
+            if ($this->isFormattedForBouquetDesign($stringLine)) {
+                $container->addBouquetDesign(BouquetDesign::fromLine($stringLine));
             }
         }
 
         fclose($fn);
 
-        return new FlowerBouquetContainer();
+        return $container;
     }
 
-    public function isEmptyLine(string $result): bool
+    private function isEmptyLine(string $line): bool
     {
-        return !empty($result);
+        return empty($line);
     }
 
-    public function isFormatttedForFlower($result): bool
+    private function isFormattedForFlower(string $line): bool
     {
-        return !empty($result);
+        return (bool)preg_match('/^[a-z](S|L)$/', $line);
+    }
+
+    private function isFormattedForBouquetDesign(string $line): bool
+    {
+        return (bool)preg_match('/^[A-Z](S|L)(.*)([0-9]+)$/', $line);
     }
 }
