@@ -48,7 +48,7 @@ final class GenerateBouquetCollection
                 continue;
             }
             // Extract the quantity left in the container
-            $flowersInBouquet[] = $flower->extractQuantity($flowerExtracted->quantity());
+            $flowersInBouquet[] = $flower;
         }
 
         return new Bouquet(
