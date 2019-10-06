@@ -14,7 +14,7 @@ final class BouquetCollectionHasBeenGeneratedProperlyTest extends TestCase
     public final function test_bouquet_collection_is_empty_when_the_container_does_not_have_bouquet_designs() {
         $container = new FlowerBouquetContainer();
 
-        $collection = (new GenerateBouquetCollection())->fromContainer($container);
+        $collection = GenerateBouquetCollection::fromContainer($container);
 
         $this->assertEmpty($collection);
     }
@@ -24,7 +24,7 @@ final class BouquetCollectionHasBeenGeneratedProperlyTest extends TestCase
         $container = new FlowerBouquetContainer;
         $container->addBouquetDesign($bouquetDesign);
 
-        $collection = (new GenerateBouquetCollection())->fromContainer($container);
+        $collection = GenerateBouquetCollection::fromContainer($container);
 
         $bouquet = $collection[0];
         $this->assertEquals($bouquetDesign->name(), $bouquet->name());
@@ -43,7 +43,7 @@ final class BouquetCollectionHasBeenGeneratedProperlyTest extends TestCase
         $container->addFlower($flower3);
         $container->addBouquetDesign($bouquetDesign);
 
-        $collection = (new GenerateBouquetCollection())->fromContainer($container);
+        $collection = GenerateBouquetCollection::fromContainer($container);
 
         $bouquet = $collection[0];
         $this->assertEquals($flowers, $bouquet->flowers());
@@ -62,7 +62,7 @@ final class BouquetCollectionHasBeenGeneratedProperlyTest extends TestCase
         $container->addFlower($flower3);
         $container->addBouquetDesign($bouquetDesign);
 
-        $collection = (new GenerateBouquetCollection())->fromContainer($container);
+        $collection = GenerateBouquetCollection::fromContainer($container);
 
         $bouquet = $collection[0];
         $this->assertEquals($flowers, $bouquet->flowers());
@@ -83,7 +83,7 @@ final class BouquetCollectionHasBeenGeneratedProperlyTest extends TestCase
         $container->addFlower($flower4);
         $container->addBouquetDesign($bouquetDesign);
 
-        $collection = (new GenerateBouquetCollection())->fromContainer($container);
+        $collection = GenerateBouquetCollection::fromContainer($container);
 
         $bouquet = $collection[0];
         $this->assertEquals([ $flower1, $flower2, $flower3, $flower4 ], $bouquet->flowers());
@@ -104,7 +104,7 @@ final class BouquetCollectionHasBeenGeneratedProperlyTest extends TestCase
         $container->addFlower($flower4);
         $container->addBouquetDesign($bouquetDesign);
 
-        $collection = (new GenerateBouquetCollection())->fromContainer($container);
+        $collection = GenerateBouquetCollection::fromContainer($container);
 
         $bouquet = $collection[0];
         $this->assertEquals(3, $bouquet->totalFlowersLeft());
@@ -122,7 +122,7 @@ final class BouquetCollectionHasBeenGeneratedProperlyTest extends TestCase
         $container->addFlower($flower4);
         $container->addBouquetDesign($bouquetDesign);
 
-        $collection = (new GenerateBouquetCollection())->fromContainer($container);
+        $collection = GenerateBouquetCollection::fromContainer($container);
 
         $bouquet = $collection[0];
         $this->assertEquals([ $flower3, $flower4 ], $bouquet->flowers());
@@ -150,7 +150,7 @@ final class BouquetCollectionHasBeenGeneratedProperlyTest extends TestCase
         $container->addBouquetDesign($bouquetDesign2);
 
 
-        $collection = (new GenerateBouquetCollection())->fromContainer($container);
+        $collection = GenerateBouquetCollection::fromContainer($container);
 
         $bouquet1 = $collection[0];
         $this->assertEquals([ $flower1, $flower3 ], $bouquet1->flowers());

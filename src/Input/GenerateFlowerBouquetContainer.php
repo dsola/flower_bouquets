@@ -11,41 +11,44 @@ use Solaing\FlowerBouquets\Entities\FlowerBouquetContainer;
 
 final class GenerateFlowerBouquetContainer
 {
-    public function fromFilePath(string $filePath): FlowerBouquetContainer
+    private function __construct()
     {
-        $fn = fopen($filePath, "r");
+    }
+
+    public static function fromResource($streamResource): FlowerBouquetContainer
+    {
         $container = new FlowerBouquetContainer();
 
-        while (!feof($fn)) {
-            $stringLine = trim((string)fgetss($fn));
-            if ($this->isEmptyLine($stringLine)) {
+        while (!feof($streamResource)) {
+            $stringLine = trim((string)fgetss($streamResource));
+            if (self::isEmptyLine($stringLine)) {
                 continue;
             }
-            if ($this->isFormattedForFlower($stringLine)) {
+            if (self::isFormattedForFlower($stringLine)) {
                 $container->addFlower(Flower::fromLine($stringLine));
                 continue;
             }
-            if ($this->isFormattedForBouquetDesign($stringLine)) {
+            if (self::isFormattedForBouquetDesign($stringLine)) {
                 $container->addBouquetDesign(BouquetDesign::fromLine($stringLine));
             }
         }
 
-        fclose($fn);
+        fclose($streamResource);
 
         return $container;
     }
 
-    private function isEmptyLine(string $line): bool
+    private static function isEmptyLine(string $line): bool
     {
         return empty($line);
     }
 
-    private function isFormattedForFlower(string $line): bool
+    private static function isFormattedForFlower(string $line): bool
     {
         return (bool)preg_match('/^[a-z](S|L)$/', $line);
     }
 
-    private function isFormattedForBouquetDesign(string $line): bool
+    private static function isFormattedForBouquetDesign(string $line): bool
     {
         return (bool)preg_match('/^[A-Z](S|L)(.*)([0-9]+)$/', $line);
     }

@@ -11,31 +11,35 @@ use Solaing\FlowerBouquets\Entities\FlowerSize;
 
 final class GenerateBouquetCollection
 {
+    private function __construct()
+    {
+    }
+
     /**
      * @param FlowerBouquetContainer $container
      * @return Bouquet[]
      */
-    public function fromContainer(FlowerBouquetContainer $container): array
+    public static function fromContainer(FlowerBouquetContainer $container): array
     {
         /** @var Bouquet[] $bouquets */
         $bouquets = [];
         /** @var BouquetDesign[] $bouquetDesigns */
         $bouquetDesigns = $container->bouquetDesigns();
         foreach ($bouquetDesigns as $bouquetDesign) {
-            $bouquets[] = $this->generateBouquet($bouquetDesign, $container);
+            $bouquets[] = self::generateBouquet($bouquetDesign, $container);
         }
 
         foreach ($bouquets as $key => $bouquet) {
             $totalFlowersLeft = $bouquet->totalFlowersLeft();
             if ($totalFlowersLeft > 0) {
-                $bouquets[$key] = $this->refillBouquet($container, $totalFlowersLeft, $bouquet);
+                $bouquets[$key] = self::refillBouquet($container, $totalFlowersLeft, $bouquet);
             }
         }
 
         return $bouquets;
     }
 
-    private function generateBouquet(BouquetDesign $bouquetDesign, FlowerBouquetContainer $container): Bouquet
+    private static function generateBouquet(BouquetDesign $bouquetDesign, FlowerBouquetContainer $container): Bouquet
     {
         $flowersInBouquet = [];
         foreach ($bouquetDesign->flowers() as $flower) {
@@ -55,7 +59,7 @@ final class GenerateBouquetCollection
         );
     }
 
-    public function refillBouquet(FlowerBouquetContainer $container, int $totalFlowersLeft, Bouquet $bouquet): Bouquet
+    private static function refillBouquet(FlowerBouquetContainer $container, int $totalFlowersLeft, Bouquet $bouquet): Bouquet
     {
         $flowersFromContainer = $container->extractExactQuantityOfFlowers($totalFlowersLeft);
 

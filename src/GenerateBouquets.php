@@ -4,32 +4,35 @@ declare(strict_types=1);
 namespace Solaing\FlowerBouquets;
 
 use Solaing\FlowerBouquets\Input\GenerateFlowerBouquetContainer;
+use Solaing\FlowerBouquets\Output\GenerateBouquetCollection;
+use Symfony\Component\Console\Input\StreamableInputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 final class GenerateBouquets
 {
-    /**
-     * @var OutputInterface
-     */
     private $output;
     /**
-     * @var GenerateFlowerBouquetContainer
+     * @var StreamableInputInterface
      */
-    private $generateFlowerBouquetContainer;
+    private $input;
 
-    public function __construct(OutputInterface $output, GenerateFlowerBouquetContainer $generateFlowerBouquetContainer)
-    {
+    public function __construct(StreamableInputInterface $input, OutputInterface $output) {
         $this->output = $output;
-        $this->generateFlowerBouquetContainer = $generateFlowerBouquetContainer;
+        $this->input = $input;
     }
 
-    public function exec(string $filePath): void
+    public function exec(): void
     {
-        $container = $this->generateFlowerBouquetContainer->fromFilePath($filePath);
+        $container = GenerateFlowerBouquetContainer::fromResource($this->input->getStream());
+
+        $bouquets = GenerateBouquetCollection::fromContainer($container);
 
         $this->output->writeln("-------------------------");
         $this->output->writeln("----- Flower Bouquets ---");
         $this->output->writeln("-------------------------");
+        foreach ($bouquets as $bouquet) {
+            $this->output->writeln($bouquet->render());
+        }
     }
 
 }
