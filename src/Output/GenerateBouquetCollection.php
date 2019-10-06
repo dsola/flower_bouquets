@@ -11,6 +11,10 @@ use Solaing\FlowerBouquets\Entities\FlowerSize;
 
 final class GenerateBouquetCollection
 {
+    /**
+     * @param FlowerBouquetContainer $container
+     * @return Bouquet[]
+     */
     public function fromContainer(FlowerBouquetContainer $container): array
     {
         /** @var Bouquet[] $bouquets */
@@ -35,11 +39,12 @@ final class GenerateBouquetCollection
     {
         $flowersInBouquet = [];
         foreach ($bouquetDesign->flowers() as $flower) {
-            $flower = $container->extractFlower($flower);
-            if (null === $flower) {
+            $flowerExtracted = $container->extractFlower($flower);
+            if (null === $flowerExtracted) {
                 continue;
             }
-            $flowersInBouquet[] = $flower;
+            // Extract the quantity left in the container
+            $flowersInBouquet[] = $flower->extractQuantity($flowerExtracted->quantity());
         }
 
         return new Bouquet(
@@ -52,7 +57,7 @@ final class GenerateBouquetCollection
 
     public function refillBouquet(FlowerBouquetContainer $container, int $totalFlowersLeft, Bouquet $bouquet): Bouquet
     {
-        $flowersFromContainer = $container->extractExactQuantityFromFlowers($totalFlowersLeft);
+        $flowersFromContainer = $container->extractExactQuantityOfFlowers($totalFlowersLeft);
 
         return $bouquet->addMoreFlowers($flowersFromContainer);
     }

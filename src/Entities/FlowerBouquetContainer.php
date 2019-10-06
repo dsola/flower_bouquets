@@ -47,8 +47,11 @@ final class FlowerBouquetContainer
         return null;
     }
 
-
-    public function extractExactQuantityFromFlowers(int $quantity): array
+    /**
+     * @param int $quantity
+     * @return Flower[]
+     */
+    public function extractExactQuantityOfFlowers(int $quantity): array
     {
         $flowersToReturn = [];
         $quantityLeft = $quantity;
@@ -56,12 +59,17 @@ final class FlowerBouquetContainer
             if ($quantityLeft === 0) {
                 break;
             }
-
-            $quantityToExtract = $quantityLeft;
-            if ($quantityToExtract > $flowerInContainer->quantity()) {
-                $quantityToExtract = $flowerInContainer->quantity();
+            if ($flowerInContainer->quantity() === 0) {
+                continue;
             }
-            $flowersToReturn[] = $this->extractQuantityFromFlower($flowerInContainer, $quantityToExtract, $key);
+
+            $quantityToExtract = $this->calculateExactQuantityToExtract($quantityLeft, $flowerInContainer);
+            $this->extractQuantityFromFlower($flowerInContainer, $quantityToExtract, $key);
+            $flowersToReturn[] = new Flower(
+                new FlowerSpecie($flowerInContainer->specie()),
+                new FlowerSize($flowerInContainer->size()),
+                $quantityToExtract
+            );
             $quantityLeft = max($quantityLeft - $flowerInContainer->quantity(), 0);
         }
 
@@ -108,5 +116,15 @@ final class FlowerBouquetContainer
         $this->flowers[$key] = $flowerWithQuantityExtracted;
 
         return $flowerWithQuantityExtracted;
+    }
+
+    public function calculateExactQuantityToExtract(int $quantityLeft, Flower $flowerInContainer): int
+    {
+        $quantityToExtract = $quantityLeft;
+        if ($quantityToExtract > $flowerInContainer->quantity()) {
+            $quantityToExtract = $flowerInContainer->quantity();
+        }
+
+        return $quantityToExtract;
     }
 }

@@ -12,14 +12,14 @@ use Solaing\FlowerBouquets\Entities\FlowerSize;
 
 final class BouquetDesignFactory
 {
-    public static function make(): BouquetDesign
+    public static function make(array $flowers = null, int $quantity = null): BouquetDesign
     {
         $faker = Factory::create();
         return new BouquetDesign(
             new BouquetName(strtoupper($faker->randomLetter)),
             new FlowerSize($faker->randomElement(['S', 'L'])),
-            self::generateFlowers(),
-            random_int(1, 200)
+            $flowers ?? self::generateFlowers(),
+            $quantity ?? random_int(1, 200)
         );
     }
 
