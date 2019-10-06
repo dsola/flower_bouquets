@@ -43,11 +43,9 @@ final class GenerateBouquetCollection
     {
         $flowersInBouquet = [];
         foreach ($bouquetDesign->flowers() as $flower) {
-            $flowerExtracted = $container->extractFlower($flower);
-            if (null === $flowerExtracted) {
+            if (null === $container->extractFlower($flower)) {
                 continue;
             }
-            // Extract the quantity left in the container
             $flowersInBouquet[] = $flower;
         }
 
