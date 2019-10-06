@@ -40,10 +40,7 @@ final class FlowerBouquetContainer
     {
         foreach ($this->flowers as $key => $flowerInContainer) {
             if ($flowerInContainer->isSameAs($flower)) {
-                $flowerWithQuantityExtracted = $flowerInContainer->extractQuantity($flower->quantity());
-                $this->flowers[$key] = $flowerWithQuantityExtracted;
-
-                return $flowerWithQuantityExtracted;
+                return $this->extractQuantityFromFlower($flowerInContainer, $flower->quantity(), $key);
             }
         }
 
@@ -51,10 +48,24 @@ final class FlowerBouquetContainer
     }
 
 
-    public function getFlowersWithExactQuantity(int $quantity): array
+    public function extractExactQuantityFromFlowers(int $quantity): array
     {
-        //TODO: Return flowers that sums the exact quantity
-        return [];
+        $flowersToReturn = [];
+        $quantityLeft = $quantity;
+        foreach ($this->flowers as $key => $flowerInContainer) {
+            if ($quantityLeft === 0) {
+                break;
+            }
+
+            $quantityToExtract = $quantityLeft;
+            if ($quantityToExtract > $flowerInContainer->quantity()) {
+                $quantityToExtract = $flowerInContainer->quantity();
+            }
+            $flowersToReturn[] = $this->extractQuantityFromFlower($flowerInContainer, $quantityToExtract, $key);
+            $quantityLeft = max($quantityLeft - $flowerInContainer->quantity(), 0);
+        }
+
+        return $flowersToReturn;
     }
 
     private function getSameFlowerFromTheContainer(Flower $flower): ?Flower
@@ -89,5 +100,13 @@ final class FlowerBouquetContainer
     public function bouquetDesigns(): array
     {
         return $this->bouquetDesigns;
+    }
+
+    public function extractQuantityFromFlower(Flower $flowerInContainer, int $quantity, int $key): Flower
+    {
+        $flowerWithQuantityExtracted = $flowerInContainer->extractQuantity($quantity);
+        $this->flowers[$key] = $flowerWithQuantityExtracted;
+
+        return $flowerWithQuantityExtracted;
     }
 }

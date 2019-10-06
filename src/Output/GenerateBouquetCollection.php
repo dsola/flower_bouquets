@@ -52,7 +52,7 @@ final class GenerateBouquetCollection
 
     public function refillBouquet(FlowerBouquetContainer $container, int $totalFlowersLeft, Bouquet $bouquet): Bouquet
     {
-        $flowersFromContainer = $container->getFlowersWithExactQuantity($totalFlowersLeft);
+        $flowersFromContainer = $container->extractExactQuantityFromFlowers($totalFlowersLeft);
 
         return $bouquet->addMoreFlowers($flowersFromContainer);
     }

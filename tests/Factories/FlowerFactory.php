@@ -20,4 +20,9 @@ final class FlowerFactory
             $quantity ?? random_int(1, 200)
         );
     }
+
+    public static function withQuantity(int $quantity): Flower
+    {
+        return self::make(null, null, $quantity);
+    }
 }

@@ -6,6 +6,7 @@ namespace Solaing\FlowerBouquets\Tests\Unit\Entities;
 
 
 use PHPUnit\Framework\TestCase;
+use Solaing\FlowerBouquets\Exceptions\TooManyFlowersInTheBouquet;
 use Solaing\FlowerBouquets\Tests\Factories\BouquetFactory;
 use Solaing\FlowerBouquets\Tests\Factories\FlowerFactory;
 
@@ -46,12 +47,12 @@ final class BouquetCanBeCompletelyFilledTest extends TestCase
             FlowerFactory::make(null, null, 2)
         ], 10);
 
+        $this->expectException(TooManyFlowersInTheBouquet::class);
+
         $newBouquet = $bouquet->addMoreFlowers([
             FlowerFactory::make(null, null, 1),
             FlowerFactory::make(null, null, 1),
-            FlowerFactory::make(null, null,3)
+            FlowerFactory::make(null, null,25)
         ]);
-
-        $this->assertEquals(6, sizeof($newBouquet->flowers()));
     }
 }

@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 use Solaing\FlowerBouquets\Entities\FlowerBouquetContainer;
 use Solaing\FlowerBouquets\Tests\Factories\FlowerFactory;
 
-final class FlowersAreExtractedFromTheBouquetContainerTest extends TestCase
+final class FlowersAreExtractedFromTheContainerTest extends TestCase
 {
     public final function test_flower_is_not_extracted_if_is_not_there() {
         $flower1 = FlowerFactory::make("a", "S");
