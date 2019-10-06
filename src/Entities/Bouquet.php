@@ -42,11 +42,11 @@ final class Bouquet
     public function totalFlowersLeft(): int
     {
         // TODO: Add tests in entity
-        $totalQuantityOfFlowers = array_reduce($this->flowers, function (int $totalFlowers, Flower $flower) {
+        $totalQuantityOfFlowers = array_reduce($this->flowers, function ($totalFlowers, Flower $flower) {
             return $totalFlowers + $flower->quantity();
         });
 
-        return $this->totalFlowers - $totalQuantityOfFlowers;
+        return max($this->totalFlowers - $totalQuantityOfFlowers, 0);
     }
 
     public function addMoreFlowers(array $floers): self

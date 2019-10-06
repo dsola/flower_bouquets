@@ -9,10 +9,15 @@ final class BouquetName
 {
     private $name;
 
+    /**
+     * @param string $name
+     *
+     * @throws InvalidBouquetName
+     */
     public function __construct(string $name)
     {
         if (!preg_match('/^[A-Z]$/', $name)) {
-            throw InvalidBouquetName::fromCharacter($name);
+            throw InvalidBouquetName::fromInvalidName($name);
         }
         $this->name = $name;
     }

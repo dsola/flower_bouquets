@@ -38,7 +38,6 @@ final class FlowerBouquetContainer
 
     public function extractFlower(Flower $flower): ?Flower
     {
-        //TODO: Add tests
         foreach ($this->flowers as $key => $flowerInContainer) {
             if ($flowerInContainer->isSameAs($flower)) {
                 $flowerWithQuantityExtracted = $flowerInContainer->extractQuantity($flower->quantity());

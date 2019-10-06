@@ -9,7 +9,7 @@ use Solaing\FlowerBouquets\Entities\FlowerBouquetContainer;
 use Solaing\FlowerBouquets\Tests\Factories\BouquetDesignFactory;
 use Solaing\FlowerBouquets\Tests\Factories\FlowerFactory;
 
-final class TheBouquetContainerStoresTheFlowersAndBouquetsTest extends TestCase
+final class ContainerStoresTheFlowersAndBouquetsTest extends TestCase
 {
     final public function test_the_container_adds_flowers() {
         $flower = FlowerFactory::make();
