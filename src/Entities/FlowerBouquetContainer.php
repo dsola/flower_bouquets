@@ -79,6 +79,9 @@ final class FlowerBouquetContainer
         }
     }
 
+    /**
+     * @return Flower[]
+     */
     public function flowers(): array
     {
         return $this->flowers;
