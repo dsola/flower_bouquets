@@ -20,7 +20,7 @@ final class BouquetDesignIsGeneratedFromStringLineTest extends TestCase
     {
         $bouquetDesign = BouquetDesign::fromLine("AS3a4b6k20");
 
-        $this->assertEquals("S", $bouquetDesign->flowerSize());
+        $this->assertEquals("S", $bouquetDesign->bouquetSize());
     }
 
     public final function test_bouquet_design_contains_the_correct_total()
@@ -37,7 +37,7 @@ final class BouquetDesignIsGeneratedFromStringLineTest extends TestCase
         /** @var Flower $flower */
         $flower = $bouquetDesign->flowers()[0];
         $this->assertEquals("a", $flower->specie());
-        $this->assertEquals("S", $flower->size());
+        $this->assertEquals("S", $flower->bouquetSize());
         $this->assertEquals(3, $flower->quantity());
     }
 
@@ -49,15 +49,15 @@ final class BouquetDesignIsGeneratedFromStringLineTest extends TestCase
         /** @var Flower $flower */
         $flower = $flowers[0];
         $this->assertEquals("a", $flower->specie());
-        $this->assertEquals("S", $flower->size());
+        $this->assertEquals("S", $flower->bouquetSize());
         $this->assertEquals(3, $flower->quantity());
         $flower = $flowers[1];
         $this->assertEquals("b", $flower->specie());
-        $this->assertEquals("S", $flower->size());
+        $this->assertEquals("S", $flower->bouquetSize());
         $this->assertEquals(4, $flower->quantity());
         $flower = $flowers[2];
         $this->assertEquals("k", $flower->specie());
-        $this->assertEquals("S", $flower->size());
+        $this->assertEquals("S", $flower->bouquetSize());
         $this->assertEquals(6, $flower->quantity());
     }
 

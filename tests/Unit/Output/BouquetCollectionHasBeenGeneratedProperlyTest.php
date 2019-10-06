@@ -28,7 +28,7 @@ final class BouquetCollectionHasBeenGeneratedProperlyTest extends TestCase
 
         $bouquet = $collection[0];
         $this->assertEquals($bouquetDesign->name(), $bouquet->name());
-        $this->assertEquals($bouquetDesign->flowerSize(), $bouquet->flowerSize());
+        $this->assertEquals($bouquetDesign->bouquetSize(), $bouquet->flowerSize());
     }
 
     public final function test_bouquet_is_created_with_bouquet_design_and_exactly_same_flowers() {

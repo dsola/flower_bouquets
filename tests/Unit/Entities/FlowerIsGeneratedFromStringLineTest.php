@@ -5,7 +5,7 @@ namespace Solaing\FlowerBouquets\Tests\Unit\Entities;
 
 use PHPUnit\Framework\TestCase;
 use Solaing\FlowerBouquets\Entities\Flower;
-use Solaing\FlowerBouquets\Exceptions\InvalidFlowerSize;
+use Solaing\FlowerBouquets\Exceptions\InvalidBouquetSize;
 use Solaing\FlowerBouquets\Exceptions\InvalidFlowerSpecie;
 
 final class FlowerIsGeneratedFromStringLineTest extends TestCase
@@ -15,12 +15,12 @@ final class FlowerIsGeneratedFromStringLineTest extends TestCase
         $flower = Flower::fromLine("aL");
 
         $this->assertEquals("a", $flower->specie());
-        $this->assertEquals("L", $flower->size());
+        $this->assertEquals("L", $flower->bouquetSize());
         $this->assertEquals(1, $flower->quantity());
     }
 
     final public function test_flower_is_not_generated_with_the_wrong_size() {
-        $this->expectException(InvalidFlowerSize::class);
+        $this->expectException(InvalidBouquetSize::class);
 
         Flower::fromLine("aK");
     }

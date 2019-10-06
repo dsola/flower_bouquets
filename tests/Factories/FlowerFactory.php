@@ -5,7 +5,7 @@ namespace Solaing\FlowerBouquets\Tests\Factories;
 
 use Faker\Factory;
 use Solaing\FlowerBouquets\Entities\Flower;
-use Solaing\FlowerBouquets\Entities\FlowerSize;
+use Solaing\FlowerBouquets\Entities\BouquetSize;
 use Solaing\FlowerBouquets\Entities\FlowerSpecie;
 
 final class FlowerFactory
@@ -16,7 +16,7 @@ final class FlowerFactory
 
         return new Flower(
             new FlowerSpecie($specie ?? strtolower($faker->randomLetter)),
-            new FlowerSize($size ?? $faker->randomElement(["S", "L"])),
+            new BouquetSize($size ?? $faker->randomElement(["S", "L"])),
             $quantity ?? random_int(1, 200)
         );
     }

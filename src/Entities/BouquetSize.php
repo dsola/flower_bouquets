@@ -5,21 +5,21 @@ declare(strict_types=1);
 namespace Solaing\FlowerBouquets\Entities;
 
 
-use Solaing\FlowerBouquets\Exceptions\InvalidFlowerSize;
+use Solaing\FlowerBouquets\Exceptions\InvalidBouquetSize;
 
-final class FlowerSize
+final class BouquetSize
 {
     private $size;
 
     /**
      * @param string $size
      *
-     * @throws InvalidFlowerSize
+     * @throws InvalidBouquetSize
      */
     public function __construct(string $size)
     {
         if (!preg_match('/^(S|L)$/', $size)) {
-            throw InvalidFlowerSize::fromCharacter($size);
+            throw InvalidBouquetSize::fromCharacter($size);
         }
         $this->size = $size;
     }

@@ -9,7 +9,7 @@ use Faker\Factory;
 use Solaing\FlowerBouquets\Aggregates\Bouquet;
 use Solaing\FlowerBouquets\Entities\BouquetName;
 use Solaing\FlowerBouquets\Entities\Flower;
-use Solaing\FlowerBouquets\Entities\FlowerSize;
+use Solaing\FlowerBouquets\Entities\BouquetSize;
 
 final class BouquetFactory
 {
@@ -17,7 +17,7 @@ final class BouquetFactory
     {
         return new Bouquet(
             new BouquetName(strtoupper($name)),
-            new FlowerSize($size),
+            new BouquetSize($size),
             $flowers,
             $totalOfFlowers
         );
@@ -34,7 +34,7 @@ final class BouquetFactory
 
         return new Bouquet(
             new BouquetName(strtoupper($faker->randomLetter)),
-            new FlowerSize($faker->randomElement(['S', 'L'])),
+            new BouquetSize($faker->randomElement(['S', 'L'])),
             $flowers,
             $totalOfFlowers
         );
@@ -44,7 +44,7 @@ final class BouquetFactory
     {
         return new Bouquet(
             new BouquetName($name),
-            new FlowerSize($size),
+            new BouquetSize($size),
             [],
             0
         );

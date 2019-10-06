@@ -31,7 +31,7 @@ final class ContainerStoresTheFlowersAndBouquetsTest extends TestCase
 
     final public function test_the_container_increases_the_quantity_of_flowers_if_is_there() {
         $flower1 = FlowerFactory::make();
-        $flower2 = FlowerFactory::make($flower1->specie(), $flower1->size());
+        $flower2 = FlowerFactory::make($flower1->specie(), $flower1->bouquetSize());
         $container = new FlowerBouquetContainer();
 
         $container->addFlower($flower1);

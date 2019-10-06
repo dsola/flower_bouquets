@@ -7,7 +7,7 @@ namespace Solaing\FlowerBouquets\Aggregates;
 
 use Solaing\FlowerBouquets\Entities\BouquetName;
 use Solaing\FlowerBouquets\Entities\Flower;
-use Solaing\FlowerBouquets\Entities\FlowerSize;
+use Solaing\FlowerBouquets\Entities\BouquetSize;
 use Solaing\FlowerBouquets\Exceptions\TooManyFlowersInTheBouquet;
 
 final class Bouquet
@@ -21,7 +21,7 @@ final class Bouquet
      */
     private $totalFlowers;
 
-    public function __construct(BouquetName $name, FlowerSize $flowerSize, array $flowers, int $totalFlowers)
+    public function __construct(BouquetName $name, BouquetSize $flowerSize, array $flowers, int $totalFlowers)
     {
         $this->name = $name;
         $this->flowerSize = $flowerSize;
@@ -34,7 +34,7 @@ final class Bouquet
         return (string)$this->name;
     }
 
-    public function flowerSize(): FlowerSize
+    public function flowerSize(): BouquetSize
     {
         return $this->flowerSize;
     }

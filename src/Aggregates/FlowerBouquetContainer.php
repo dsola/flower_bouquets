@@ -7,7 +7,7 @@ namespace Solaing\FlowerBouquets\Aggregates;
 
 use Solaing\FlowerBouquets\Entities\BouquetDesign;
 use Solaing\FlowerBouquets\Entities\Flower;
-use Solaing\FlowerBouquets\Entities\FlowerSize;
+use Solaing\FlowerBouquets\Entities\BouquetSize;
 use Solaing\FlowerBouquets\Entities\FlowerSpecie;
 
 final class FlowerBouquetContainer
@@ -72,7 +72,7 @@ final class FlowerBouquetContainer
             $this->extractQuantityFromFlower($flowerInContainer, $quantityToExtract, $key);
             $flowersToReturn[] = new Flower(
                 new FlowerSpecie($flowerInContainer->specie()),
-                new FlowerSize($flowerInContainer->size()),
+                new BouquetSize($flowerInContainer->bouquetSize()),
                 $quantityToExtract
             );
             $quantityLeft = max($quantityLeft - $flowerInContainer->quantity(), 0);

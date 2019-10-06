@@ -8,14 +8,14 @@ namespace Solaing\FlowerBouquets\Entities;
 final class BouquetDesign
 {
     private $name;
-    private $flowerSize;
+    private $bouquetSize;
     private $flowers;
     private $totalFlowers;
 
-    public function __construct(BouquetName $name, FlowerSize $flowerSize, array $flowers, int $totalFlowers)
+    public function __construct(BouquetName $name, BouquetSize $bouquetSize, array $flowers, int $totalFlowers)
     {
         $this->name = $name;
-        $this->flowerSize = $flowerSize;
+        $this->bouquetSize = $bouquetSize;
         $this->flowers = $flowers;
         $this->totalFlowers = $totalFlowers;
     }
@@ -24,7 +24,7 @@ final class BouquetDesign
     {
         $chars = str_split($stringLine);
         $name = new BouquetName($chars[0]);
-        $flowerSize = new FlowerSize($chars[1]);
+        $flowerSize = new BouquetSize($chars[1]);
         $total = self::extractLastNumberOccurrence($chars);
         $numOfDigitsInTotal = strlen((string)$total);
         $flowerCharsSize = sizeof($chars) - 2 - $numOfDigitsInTotal;
@@ -36,7 +36,7 @@ final class BouquetDesign
         return new self($name, $flowerSize, $flowers, $total);
     }
 
-    private static function extractFlowers(array $chars, FlowerSize $flowerSize): array
+    private static function extractFlowers(array $chars, BouquetSize $flowerSize): array
     {
         $flowers = [];
 
@@ -60,9 +60,9 @@ final class BouquetDesign
         return (string)$this->name;
     }
 
-    public function flowerSize(): string
+    public function bouquetSize(): string
     {
-        return (string)$this->flowerSize;
+        return (string)$this->bouquetSize;
     }
 
     /**

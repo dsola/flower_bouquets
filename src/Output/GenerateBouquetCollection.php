@@ -7,7 +7,7 @@ use Solaing\FlowerBouquets\Aggregates\Bouquet;
 use Solaing\FlowerBouquets\Entities\BouquetDesign;
 use Solaing\FlowerBouquets\Entities\BouquetName;
 use Solaing\FlowerBouquets\Aggregates\FlowerBouquetContainer;
-use Solaing\FlowerBouquets\Entities\FlowerSize;
+use Solaing\FlowerBouquets\Entities\BouquetSize;
 
 final class GenerateBouquetCollection
 {
@@ -51,7 +51,7 @@ final class GenerateBouquetCollection
 
         return new Bouquet(
             new BouquetName($bouquetDesign->name()),
-            new FlowerSize($bouquetDesign->flowerSize()),
+            new BouquetSize($bouquetDesign->bouquetSize()),
             $flowersInBouquet,
             $bouquetDesign->totalFlowers()
         );

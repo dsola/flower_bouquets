@@ -8,13 +8,13 @@ namespace Solaing\FlowerBouquets\Entities;
 final class Flower
 {
     private $specie;
-    private $size;
+    private $bouquetSize;
     private $quantity;
 
-    public function __construct(FlowerSpecie $specie, FlowerSize $size, int $quantity)
+    public function __construct(FlowerSpecie $specie, BouquetSize $size, int $quantity)
     {
         $this->specie = $specie;
-        $this->size = $size;
+        $this->bouquetSize = $size;
         $this->quantity = $quantity;
     }
 
@@ -22,7 +22,7 @@ final class Flower
     {
         $chars = str_split($stringLine);
 
-        return new self(new FlowerSpecie($chars[0]), new FlowerSize($chars[1]), 1);
+        return new self(new FlowerSpecie($chars[0]), new BouquetSize($chars[1]), 1);
     }
 
     public function increaseQuantity(): self {
@@ -49,9 +49,9 @@ final class Flower
         return (string)$this->specie;
     }
 
-    public function size(): string
+    public function bouquetSize(): string
     {
-        return (string)$this->size;
+        return (string)$this->bouquetSize;
     }
 
     public function quantity(): int
@@ -61,7 +61,7 @@ final class Flower
 
     public function isSameAs(Flower $flower): bool
     {
-        return $this->specie() === $flower->specie() && $this->size() === $flower->size();
+        return $this->specie() === $flower->specie() && $this->bouquetSize() === $flower->bouquetSize();
     }
 
     public function render(): string
