@@ -8,7 +8,7 @@ use Solaing\FlowerBouquets\Input\GenerateFlowerBouquetContainer;
 
 final class FlowerBouquetContainerIsBeingGeneratedFromFileTest extends TestCase
 {
-    private const RESOURCES_DIR_PATH = __DIR__ . '/../../resources';
+    private const RESOURCES_DIR_PATH = __DIR__ . '/../../../resources';
 
     public final function test_container_is_not_filled_when_there_is_an_empty_line() {
         $streamResource = fopen(self::RESOURCES_DIR_PATH . '/empty_file.txt', 'r');

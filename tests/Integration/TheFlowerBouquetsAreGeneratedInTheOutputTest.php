@@ -12,6 +12,8 @@ use Solaing\FlowerBouquets\Tests\Stubs\OutputStub;
 
 final class TheFlowerBouquetsAreGeneratedInTheOutputTest extends TestCase
 {
+    private const RESOURCES_DIR_PATH = __DIR__ . '/../../resources';
+
     private $output;
     private $input;
 
@@ -23,7 +25,7 @@ final class TheFlowerBouquetsAreGeneratedInTheOutputTest extends TestCase
     }
 
     public final function test_the_flower_bouquets_title_is_generated() {
-        $filePath = __DIR__ . '/../resources/empty_file.txt';
+        $filePath = self::RESOURCES_DIR_PATH . '/empty_file.txt';
         $this->input->setStream(fopen($filePath, 'r'));
         (new GenerateBouquets($this->input, $this->output))->exec();
 
@@ -32,7 +34,7 @@ final class TheFlowerBouquetsAreGeneratedInTheOutputTest extends TestCase
     }
 
     public final function test_the_bouquet_is_rendered_without_flowers() {
-        $filePath = __DIR__ . '/../resources/bouquet_design.txt';
+        $filePath = self::RESOURCES_DIR_PATH . '/bouquet_design.txt';
         $this->input->setStream(fopen($filePath, 'r'));
         (new GenerateBouquets($this->input, $this->output))->exec();
 
@@ -41,7 +43,7 @@ final class TheFlowerBouquetsAreGeneratedInTheOutputTest extends TestCase
     }
 
     public final function test_any_bouquet_is_rendered_with_only_flowers() {
-        $filePath = __DIR__ . '/../resources/multiple_flowers.txt';
+        $filePath = self::RESOURCES_DIR_PATH . '/multiple_flowers.txt';
         $this->input->setStream(fopen($filePath, 'r'));
         (new GenerateBouquets($this->input, $this->output))->exec();
 
@@ -50,7 +52,7 @@ final class TheFlowerBouquetsAreGeneratedInTheOutputTest extends TestCase
     }
 
     public final function test_multiple_bouquets_are_rendered_with_multiple_designs() {
-        $filePath = __DIR__ . '/../resources/multiple_bouquet_designs.txt';
+        $filePath = self::RESOURCES_DIR_PATH . '/multiple_bouquet_designs.txt';
         $this->input->setStream(fopen($filePath, 'r'));
         (new GenerateBouquets($this->input, $this->output))->exec();
 
@@ -64,7 +66,7 @@ final class TheFlowerBouquetsAreGeneratedInTheOutputTest extends TestCase
     }
 
     public final function test_with_the_sample() {
-        $filePath = __DIR__ . '/../resources/sample.txt';
+        $filePath = self::RESOURCES_DIR_PATH . '/sample.txt';
         $this->input->setStream(fopen($filePath, 'r'));
         (new GenerateBouquets($this->input, $this->output))->exec();
 
