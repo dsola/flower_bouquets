@@ -7,7 +7,7 @@ namespace Solaing\FlowerBouquets\Input;
 
 use Solaing\FlowerBouquets\Entities\BouquetDesign;
 use Solaing\FlowerBouquets\Entities\Flower;
-use Solaing\FlowerBouquets\Entities\FlowerBouquetContainer;
+use Solaing\FlowerBouquets\Aggregates\FlowerBouquetContainer;
 
 final class GenerateFlowerBouquetContainer
 {

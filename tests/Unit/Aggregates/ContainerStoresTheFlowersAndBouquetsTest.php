@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace Solaing\FlowerBouquets\Tests\Unit\Entities;
+namespace Solaing\FlowerBouquets\Tests\Unit\Aggregates;
 
 use PHPUnit\Framework\TestCase;
 use Solaing\FlowerBouquets\Entities\Flower;
-use Solaing\FlowerBouquets\Entities\FlowerBouquetContainer;
+use Solaing\FlowerBouquets\Aggregates\FlowerBouquetContainer;
 use Solaing\FlowerBouquets\Tests\Factories\BouquetDesignFactory;
 use Solaing\FlowerBouquets\Tests\Factories\FlowerFactory;
 

@@ -3,10 +3,10 @@ declare(strict_types=1);
 
 namespace Solaing\FlowerBouquets\Output;
 
-use Solaing\FlowerBouquets\Entities\Bouquet;
+use Solaing\FlowerBouquets\Aggregates\Bouquet;
 use Solaing\FlowerBouquets\Entities\BouquetDesign;
 use Solaing\FlowerBouquets\Entities\BouquetName;
-use Solaing\FlowerBouquets\Entities\FlowerBouquetContainer;
+use Solaing\FlowerBouquets\Aggregates\FlowerBouquetContainer;
 use Solaing\FlowerBouquets\Entities\FlowerSize;
 
 final class GenerateBouquetCollection

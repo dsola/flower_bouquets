@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Solaing\FlowerBouquets\Tests\Unit\Output;
 
 use PHPUnit\Framework\TestCase;
-use Solaing\FlowerBouquets\Entities\FlowerBouquetContainer;
+use Solaing\FlowerBouquets\Aggregates\FlowerBouquetContainer;
 use Solaing\FlowerBouquets\Output\GenerateBouquetCollection;
 use Solaing\FlowerBouquets\Tests\Factories\BouquetDesignFactory;
 use Solaing\FlowerBouquets\Tests\Factories\FlowerFactory;

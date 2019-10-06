@@ -6,7 +6,7 @@ namespace Solaing\FlowerBouquets\Tests\Factories;
 
 
 use Faker\Factory;
-use Solaing\FlowerBouquets\Entities\Bouquet;
+use Solaing\FlowerBouquets\Aggregates\Bouquet;
 use Solaing\FlowerBouquets\Entities\BouquetName;
 use Solaing\FlowerBouquets\Entities\Flower;
 use Solaing\FlowerBouquets\Entities\FlowerSize;

@@ -2,8 +2,13 @@
 declare(strict_types=1);
 
 
-namespace Solaing\FlowerBouquets\Entities;
+namespace Solaing\FlowerBouquets\Aggregates;
 
+
+use Solaing\FlowerBouquets\Entities\BouquetDesign;
+use Solaing\FlowerBouquets\Entities\Flower;
+use Solaing\FlowerBouquets\Entities\FlowerSize;
+use Solaing\FlowerBouquets\Entities\FlowerSpecie;
 
 final class FlowerBouquetContainer
 {

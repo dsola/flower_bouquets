@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 
-namespace Solaing\FlowerBouquets\Tests\Unit\Entities;
+namespace Solaing\FlowerBouquets\Tests\Unit\Aggregates;
 
 
 use PHPUnit\Framework\TestCase;
