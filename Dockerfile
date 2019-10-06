@@ -1,8 +1,6 @@
 FROM phpunit/phpunit:latest
 MAINTAINER David Sola <d.sola.03@gmail.com>
 
-ARG resource_name
-
 WORKDIR /app
 COPY . /app
 VOLUME ["/app"]
