@@ -63,4 +63,9 @@ final class Flower
     {
         return $this->specie() === $flower->specie() && $this->size() === $flower->size();
     }
+
+    public function render(): string
+    {
+        return $this->specie() . $this->quantity();
+    }
 }

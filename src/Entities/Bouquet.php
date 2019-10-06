@@ -70,6 +70,16 @@ final class Bouquet
         return $newBouquet;
     }
 
+    public function render(): string
+    {
+        $output = $this->name . $this->flowerSize();
+        foreach ($this->flowers as $flower) {
+            $output .= $flower->render();
+        }
+
+        return $output;
+    }
+
     private function getTotalQuantityOfFlowers(array $flowers): int
     {
         if (sizeof($flowers) === 0) {

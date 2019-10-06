@@ -13,6 +13,16 @@ use Solaing\FlowerBouquets\Entities\FlowerSize;
 
 final class BouquetFactory
 {
+    public static function build(string $name, string $size, array $flowers, int $totalOfFlowers): Bouquet
+    {
+        return new Bouquet(
+            new BouquetName(strtoupper($name)),
+            new FlowerSize($size),
+            $flowers,
+            $totalOfFlowers
+        );
+    }
+
     /**
      * @param Flower[] $flowers
      * @param int $totalOfFlowers
@@ -27,6 +37,16 @@ final class BouquetFactory
             new FlowerSize($faker->randomElement(['S', 'L'])),
             $flowers,
             $totalOfFlowers
+        );
+    }
+
+    public static function buildWithNameAndSize(string $name, string $size): Bouquet
+    {
+        return new Bouquet(
+            new BouquetName($name),
+            new FlowerSize($size),
+            [],
+            0
         );
     }
 }
