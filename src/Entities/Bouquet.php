@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Solaing\FlowerBouquets\Entities;
 
 
+use Solaing\FlowerBouquets\Exceptions\TooManyFlowersInTheBouquet;
+
 final class Bouquet
 {
     private $name;
@@ -24,9 +26,9 @@ final class Bouquet
         $this->totalFlowers = $totalFlowers;
     }
 
-    public function name(): BouquetName
+    public function name(): string
     {
-        return $this->name;
+        return (string)$this->name;
     }
 
     public function flowerSize(): FlowerSize
@@ -41,17 +43,46 @@ final class Bouquet
 
     public function totalFlowersLeft(): int
     {
-        // TODO: Add tests in entity
-        $totalQuantityOfFlowers = array_reduce($this->flowers, function ($totalFlowers, Flower $flower) {
-            return $totalFlowers + $flower->quantity();
-        });
+        $totalQuantityOfFlowers = $this->getTotalQuantityOfFlowers($this->flowers);
 
         return max($this->totalFlowers - $totalQuantityOfFlowers, 0);
     }
 
-    public function addMoreFlowers(array $floers): self
+    /**
+     * @param array $flowers
+     * @return $this
+     *
+     * @throws TooManyFlowersInTheBouquet
+     */
+    public function addMoreFlowers(array $flowers): self
     {
-        //TODO: Add tests in entity
-        return $this;
+        $totalQuantityOfFlowers = $this->mergeTotalQuantityOfFlowers($flowers);
+        if ($totalQuantityOfFlowers > $this->totalFlowers) {
+            throw TooManyFlowersInTheBouquet::withQuantities(
+                $this->name(),
+                $this->totalFlowers,
+                $totalQuantityOfFlowers
+            );
+        }
+        $newBouquet = clone $this;
+        $newBouquet->flowers = array_merge($newBouquet->flowers, $flowers);
+
+        return $newBouquet;
+    }
+
+    private function getTotalQuantityOfFlowers(array $flowers): int
+    {
+        if (sizeof($flowers) === 0) {
+            return 0;
+        }
+        return array_reduce($flowers, function ($totalFlowers, Flower $flower) {
+            return $totalFlowers + $flower->quantity();
+        });
+    }
+
+
+    public function mergeTotalQuantityOfFlowers(array $flowers): int
+    {
+        return $this->getTotalQuantityOfFlowers($this->flowers) + $this->getTotalQuantityOfFlowers($flowers);
     }
 }

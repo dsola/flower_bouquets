@@ -1,9 +1,7 @@
 <?php
 declare(strict_types=1);
 
-
 namespace Solaing\FlowerBouquets\Output;
-
 
 use Solaing\FlowerBouquets\Entities\Bouquet;
 use Solaing\FlowerBouquets\Entities\BouquetDesign;
@@ -26,7 +24,7 @@ final class GenerateBouquetCollection
         foreach ($bouquets as $key => $bouquet) {
             $totalFlowersLeft = $bouquet->totalFlowersLeft();
             if ($totalFlowersLeft > 0) {
-                $bouquets[$key] = $this->fillBouquet($container, $totalFlowersLeft, $bouquet);
+                $bouquets[$key] = $this->refillBouquet($container, $totalFlowersLeft, $bouquet);
             }
         }
 
@@ -52,7 +50,7 @@ final class GenerateBouquetCollection
         );
     }
 
-    public function fillBouquet(FlowerBouquetContainer $container, int $totalFlowersLeft, Bouquet $bouquet): Bouquet
+    public function refillBouquet(FlowerBouquetContainer $container, int $totalFlowersLeft, Bouquet $bouquet): Bouquet
     {
         $flowersFromContainer = $container->getFlowersWithExactQuantity($totalFlowersLeft);
 
